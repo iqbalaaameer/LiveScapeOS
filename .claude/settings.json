@@ -11,15 +11,75 @@
       "neural-enabled": true
     },
     "hooks": {
-      "pre-task": {
-        "enabled": true,
-        "trigger-keywords": ["pnl", "P&L", "profit and loss"],
-        "auto-actions": [
-          "memory_search --namespace 'pnl-patterns'",
-          "context-load ./pnl/",
-          "spawn-agents: finance-analyst, data-engineer, auditor, reviewer"
-        ]
-      }
+      "pre-task": [
+        {
+          "domain": "entertainment",
+          "trigger-keywords": ["P&L", "pnl", "profit and loss", "venue", "concert", "show", "event", "contract", "logistics"],
+          "auto-actions": [
+            "memory_search --namespace 'entertainment-ops'",
+            "memory_search --namespace 'livescape-core'",
+            "context-load ./domains/entertainment/",
+            "spawn-agents: venue-analyst, pnl-analyst, contract-reviewer, reviewer"
+          ]
+        },
+        {
+          "domain": "artist-research",
+          "trigger-keywords": ["artist", "performer", "lineup", "booking", "market research", "talent", "act", "headliner"],
+          "auto-actions": [
+            "memory_search --namespace 'artist-research'",
+            "memory_search --namespace 'livescape-core'",
+            "context-load ./domains/artist-research/",
+            "spawn-agents: market-researcher, trend-analyst, artist-evaluator, booking-strategist"
+          ]
+        },
+        {
+          "domain": "financial",
+          "trigger-keywords": ["invoice", "tax", "accounting", "audit", "payment", "receipt", "xero", "cash flow"],
+          "auto-actions": [
+            "memory_search --namespace 'financial-services'",
+            "context-load ./domains/financial/",
+            "spawn-agents: invoice-generator, tax-analyst, accounts-auditor, reviewer"
+          ]
+        },
+        {
+          "domain": "marketing",
+          "trigger-keywords": ["campaign", "content", "social media", "marketing", "post", "ad", "caption", "copy"],
+          "auto-actions": [
+            "memory_search --namespace 'digital-marketing'",
+            "memory_search --namespace 'livescape-core'",
+            "context-load ./domains/marketing/",
+            "spawn-agents: content-strategist, campaign-architect, copy-writer, performance-analyst"
+          ]
+        },
+        {
+          "domain": "agency",
+          "trigger-keywords": ["client", "rebrand", "brand strategy", "pitch", "creative brief", "proposal"],
+          "auto-actions": [
+            "memory_search --namespace 'agency-services'",
+            "context-load ./domains/agency/",
+            "spawn-agents: brand-strategist, creative-director, client-analyst, pitch-writer"
+          ]
+        },
+        {
+          "domain": "product",
+          "trigger-keywords": ["website", "landing page", "web app", "product", "build", "deploy", "fanfirst"],
+          "auto-actions": [
+            "memory_search --namespace 'product-dev'",
+            "context-load ./domains/product/",
+            "spawn-agents: ux-strategist, tech-architect, landing-page-builder, product-analyst"
+          ]
+        },
+        {
+          "domain": "data-ip",
+          "trigger-keywords": ["fan data", "database", "brand asset", "trademark", "IP", "audience segment"],
+          "auto-actions": [
+            "memory_search --namespace 'data-ip'",
+            "context-load ./domains/data-ip/",
+            "spawn-agents: data-curator, brand-guardian, ip-analyst",
+            "audit-log --action 'data-access-session-start'"
+          ]
+        }
+      ]
     }
   }
 }

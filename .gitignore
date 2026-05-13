@@ -24,3 +24,16 @@ build/
 !.claude/
 !.claude/projects/
 !.claude/projects/*/memory/
+
+# Never commit raw data files, credentials, or PII
+domains/*/data/*.csv
+domains/*/data/*.json
+domains/*/data/*.xlsx
+domains/*/data/*.pdf
+.env
+.env.local
+*.key
+*.pem
+
+# Audit log IS tracked (metadata only, no PII)
+!docs/audit-log.jsonl
