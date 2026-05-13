@@ -1,0 +1,25 @@
+{
+  "model": "claude-opus-4-7",
+  "ruflo": {
+    "enabled": true,
+    "topology": "hierarchical-mesh",
+    "max-agents": 15,
+    "memory": {
+      "backend": "local",
+      "namespace-isolation": true,
+      "hnsw-enabled": true,
+      "neural-enabled": true
+    },
+    "hooks": {
+      "pre-task": {
+        "enabled": true,
+        "trigger-keywords": ["pnl", "P&L", "profit and loss"],
+        "auto-actions": [
+          "memory_search --namespace 'pnl-patterns'",
+          "context-load ./pnl/",
+          "spawn-agents: finance-analyst, data-engineer, auditor, reviewer"
+        ]
+      }
+    }
+  }
+}
