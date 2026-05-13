@@ -1,0 +1,65 @@
+{
+  "model": "claude-opus-4-7",
+  "ruflo": {
+    "enabled": true,
+    "topology": "hierarchical-mesh",
+    "max-agents": 15,
+    "memory": {
+      "backend": "local",
+      "namespace-isolation": true,
+      "hnsw-enabled": true,
+      "neural-enabled": true
+    },
+    "hooks": {
+      "pre-task": {
+        "enabled": true,
+        "trigger-keywords": ["pnl", "P&L", "profit and loss"],
+        "auto-actions": [
+          "memory_search --namespace 'pnl-patterns'",
+          "context-load ./pnl/",
+          "spawn-agents: finance-analyst, data-engineer, auditor, reviewer"
+        ]
+      },
+      "artist-research": {
+        "enabled": true,
+        "trigger-keywords": ["artist research", "artist brief", "book artist", "booking strategy", "genre trend", "market comparison", "artist booking"],
+        "auto-actions": [
+          "memory_search --namespace 'artist-research'",
+          "spawn-agents: talent-researcher, market-analyst, booking-strategist, reviewer"
+        ]
+      },
+      "financial-services": {
+        "enabled": true,
+        "trigger-keywords": ["invoice", "cash flow", "cash flow forecast", "financial services", "payment terms"],
+        "auto-actions": [
+          "memory_search --namespace 'financial-services'",
+          "spawn-agents: finance-analyst, accountant, reviewer"
+        ]
+      },
+      "product-dev": {
+        "enabled": true,
+        "trigger-keywords": ["landing page", "product development", "product brief", "landing page brief"],
+        "auto-actions": [
+          "memory_search --namespace 'product-dev'",
+          "spawn-agents: product-strategist, ux-writer, reviewer"
+        ]
+      },
+      "digital-marketing": {
+        "enabled": true,
+        "trigger-keywords": ["campaign brief", "content calendar", "digital marketing", "marketing campaign"],
+        "auto-actions": [
+          "memory_search --namespace 'digital-marketing'",
+          "spawn-agents: marketing-strategist, content-creator, reviewer"
+        ]
+      },
+      "agency-services": {
+        "enabled": true,
+        "trigger-keywords": ["brand strategy", "pitch document", "agency services", "brand positioning", "pitch deck"],
+        "auto-actions": [
+          "memory_search --namespace 'agency-services'",
+          "spawn-agents: brand-strategist, pitch-writer, reviewer"
+        ]
+      }
+    }
+  }
+}

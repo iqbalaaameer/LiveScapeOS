@@ -1,0 +1,39 @@
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.swp
+
+# Dependencies
+node_modules/
+.env
+.env.local
+
+# Build
+dist/
+build/
+
+# Logs
+*.log
+
+# Keep .claude/ for team collaboration
+# Memory folder IS tracked in git
+!.claude/
+!.claude/projects/
+!.claude/projects/*/memory/
+
+# Never commit raw data files, credentials, or PII
+domains/*/data/*.csv
+domains/*/data/*.json
+domains/*/data/*.xlsx
+domains/*/data/*.pdf
+.env
+.env.local
+*.key
+*.pem
+
+# Audit log IS tracked (metadata only, no PII)
+!docs/audit-log.jsonl
